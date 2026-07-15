@@ -1,0 +1,41 @@
+:root{
+  --font-sans: "Noto Sans KR", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Noto Serif KR", Georgia, "Times New Roman", serif;
+  --font-size: 16px;
+
+  /* 우리동네 warm palette */
+  --background: #F7F3EC;
+  --foreground: #221F1A;
+  --card: #FFFDF9;
+  --ink: #221F1A;
+  --ink-soft: #4A463E;
+  --muted: #8B857A;
+  --border: rgba(34,31,26,0.10);
+  --border-strong: rgba(34,31,26,0.16);
+
+  --accent: #D4552A;
+  --accent-dark: #B8441F;
+  --accent-soft: #FBEAE2;
+  --accent-soft-text: #A03D1C;
+
+  --green: #5B7553;
+  --green-soft: #EAF0E6;
+  --gold: #C99B3F;
+  --gold-soft: #F7EFDD;
+  --blue: #4A6FA5;
+  --blue-soft: #E7EDF5;
+
+  --danger: #C0392B;
+  --danger-soft: #FBEAE8;
+  --like: #E0485A;
+  --like-soft: #FCEBEE;
+
+  --input-background: #FFFFFF;
+  --ring: #D4552A;
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --shadow-sm: 0 1px 2px rgba(34,31,26,0.05), 0 2px 8px rgba(34,31,26,0.04);
+  --shadow-md: 0 2px 6px rgba(34,31,26,0.06), 0 10px 28px rgba(34,31,26,0.08);
+  --shadow-lg: 0 8px 20px rgba(34,31,26,0.10), 0 24px 60px rgba(34,31,26,0.14);
+}

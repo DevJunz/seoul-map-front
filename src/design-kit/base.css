@@ -1,0 +1,25 @@
+*{box-sizing:border-box}
+html{font-family:var(--font-sans);font-size:var(--font-size)}
+body{background:var(--background);color:var(--foreground);margin:0;line-height:1.55;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+
+.container{max-width:960px;margin:0 auto;padding:0 20px}
+
+h1,h2,h3,h4{font-family:var(--font-serif);color:var(--ink);letter-spacing:-0.01em}
+
+.card{
+  background:var(--card);
+  color:var(--foreground);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:24px;
+  box-shadow:var(--shadow-sm);
+}
+
+.section-title{font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.section-desc{color:var(--muted);font-size:0.9rem;margin:0 0 18px}
+
+.empty{
+  text-align:center;color:var(--muted);padding:48px 0;font-size:0.95rem;
+}
+
+::selection{background:var(--accent-soft);color:var(--accent-dark)}
