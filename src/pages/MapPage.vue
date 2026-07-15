@@ -93,7 +93,8 @@ export default {
     }
 
     onMounted(async ()=>{
-      map.value = L.map('map').setView([37.5665, 126.9780], 11)
+      // 장소가 수천 개라 SVG 대신 캔버스 렌더링으로 성능 확보
+      map.value = L.map('map', { preferCanvas: true }).setView([37.5665, 126.9780], 11)
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
         maxZoom: 19
