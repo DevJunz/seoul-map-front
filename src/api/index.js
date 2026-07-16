@@ -61,4 +61,10 @@ export async function getCalendars(year, month){
   return r.data
 }
 
-export default { request, getPosts, createPost, patchPost, postLike, deleteLike, getPlaces, getCalendars }
+// history: [{ role: 'user' | 'assistant', content: string }]
+export async function sendChat(message, history = []){
+  const r = await request('/chat', { method: 'POST', body: JSON.stringify({ message, history }) })
+  return r.data
+}
+
+export default { request, getPosts, createPost, patchPost, postLike, deleteLike, getPlaces, getCalendars, sendChat }

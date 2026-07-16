@@ -34,6 +34,9 @@
 
 <script>
 import { ref, nextTick } from 'vue'
+import api from '../api'
+
+const GREETING = '안녕하세요! 우리동네 도우미 동네봇이에요 🙌\n동네 소식이나 축제가 궁금하면 물어보세요.'
 
 export default {
   setup(){
@@ -42,7 +45,7 @@ export default {
     const waiting = ref(false)
     const bodyEl = ref(null)
     const messages = ref([
-      { from:'bot', text:'안녕하세요! 우리동네 도우미 동네봇이에요 🙌\n동네 소식이나 축제가 궁금하면 물어보세요.' }
+      { from:'bot', text: GREETING }
     ])
 
     async function scrollToBottom(){
@@ -50,20 +53,32 @@ export default {
       if(bodyEl.value) bodyEl.value.scrollTop = bodyEl.value.scrollHeight
     }
 
+    // 최근 대화만 history로 전달 (인사말·에러 안내는 제외)
+    function buildHistory(){
+      return messages.value
+        .filter(m => !m.error && m.text !== GREETING)
+        .slice(-10)
+        .map(m => ({ role: m.from === 'user' ? 'user' : 'assistant', content: m.text }))
+    }
+
     // 응답을 기다리는 동안에도 다른 화면 기능을 계속 쓸 수 있도록 비동기로 처리
-    function send(){
+    async function send(){
       const text = input.value && input.value.trim()
       if(!text || waiting.value) return
+      const history = buildHistory()
       messages.value.push({ from:'user', text })
       input.value = ''
       waiting.value = true
       scrollToBottom()
-      // mock: 챗봇 API 연동 시 이 부분을 실제 요청으로 교체
-      setTimeout(()=>{
-        messages.value.push({ from:'bot', text: `"${text}"에 대한 답변을 준비 중이에요. 챗봇 API가 연결되면 실제 답변을 드릴게요! 😊` })
+      try{
+        const data = await api.sendChat(text, history)
+        messages.value.push({ from:'bot', text: data.answer })
+      }catch(err){
+        messages.value.push({ from:'bot', text:'죄송해요, 답변을 가져오지 못했어요. 잠시 후 다시 시도해 주세요. 🙏', error:true })
+      }finally{
         waiting.value = false
         scrollToBottom()
-      }, 900)
+      }
     }
 
     return { open, input, messages, waiting, bodyEl, send }
