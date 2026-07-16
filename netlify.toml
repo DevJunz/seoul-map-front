@@ -2,6 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
+# API 프록시: 같은 오리진으로 요청해야 백엔드의 client_id 쿠키(SameSite=lax)가 동작함
+# SPA 캐치올보다 먼저 선언해야 함
+[[redirects]]
+  from = "/api/*"
+  to = "https://localhub-api-af8h.onrender.com/:splat"
+  status = 200
+  force = true
+
 # Vue Router history 모드 SPA: 모든 경로를 index.html로 (새로고침 404 방지)
 [[redirects]]
   from = "/*"
